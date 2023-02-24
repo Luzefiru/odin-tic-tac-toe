@@ -25,6 +25,11 @@ function boardModel() {
   function newGame() {
     board = board.map(() => ['', '', '']);
   }
+  /**
+   * Checks if {symbol}'s player won the game.
+   * @param {String} symbol - the character symbol (either 'O' or 'X') of the player to check
+   * @returns {Boolean} - the verdict of whether {symbol}'s player won
+   */
   function isWinner(symbol) {
     let noMatch = true;
 
@@ -93,8 +98,17 @@ function boardModel() {
     // if noMatch is true, then {symbol} did not win, otherwise {symbol} wins
     return !noMatch;
   }
+  /**
+   * Getter function to return the current board state for DOM Rendering
+   * @returns {Array} the current board state
+   */
+  function getBoard() {
+    return board;
+  }
 
-  console.log(isWinner('O'));
+  return {
+    playTurn, newGame, isWinner, getBoard,
+  };
 }
 
 boardModel();
