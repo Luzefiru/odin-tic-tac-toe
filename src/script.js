@@ -111,16 +111,29 @@ const boardModule = (function boardModel() {
   };
 })();
 
-function display() {
-  const cells = document.querySelectorAll('.board__cell');
+const displayEngine = (function display() {
+  const cellNodeList = document.querySelectorAll('.board__cell');
 
-  function resetBoard() {
-    cells.forEach((cell) => {
-      cell.textContent = '';
-      cell.setAttribute('class', 'board__cell');
+  function renderBoard() {
+    const board = boardModule.getBoard();
+
+    // creates a cells array that contains each board value from cells 1 to 9
+    const cells = [];
+    board.forEach((row) => {
+      row.forEach((cell) => {
+        cells.push(cell);
+      });
+    });
+
+    // renders each cell's value to each of the DOM's cellNodes
+    let currentCell = 0;
+    cellNodeList.forEach((node) => {
+      node.textContent = cells[currentCell];
+      currentCell += 1;
     });
   }
-  resetBoard();
-}
 
-display();
+  return { renderBoard };
+})();
+
+displayEngine.renderBoard();
