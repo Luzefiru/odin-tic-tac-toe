@@ -53,13 +53,14 @@ body {
   background-color: var(--surface);
   border-radius: 12px;
   box-shadow: inset 2px -3px 2px var(--shadow-box);
+  color: var(--surface);
 
   font-family: 'Fredoka One';
   font-size: 7rem;
   display: grid;
   place-items: center;
 
-  transition: ease 0.2s;
+  transition: ease-in 0.075s;
 }
 
 .board__cell.X {

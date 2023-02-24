@@ -115,17 +115,6 @@ const boardModule = (function boardModel() {
 
 const displayEngine = (function display() {
   const cellNodeList = document.querySelectorAll('.board__cell');
-  const cellNumberToPosition = {
-    0: Position(0, 0),
-    1: Position(0, 1),
-    2: Position(0, 2),
-    3: Position(1, 0),
-    4: Position(1, 1),
-    5: Position(1, 2),
-    6: Position(2, 0),
-    7: Position(2, 1),
-    8: Position(2, 2),
-  };
 
   function renderBoard() {
     const board = boardModule.getBoard();
@@ -184,9 +173,10 @@ const controllerModule = (function controller() {
       const targetPos = cellNumberToPosition[currentCell];
       if (node.textContent === '') {
         node.addEventListener('click', () => {
+          // sets the class for the corresponding symbol
+          node.setAttribute('class', `board__cell ${playerSymbols[turn % 2]}`);
           // plays a turn to affect the board array
           boardModule.playTurn(targetPos, playerSymbols[turn % 2]);
-          console.log(boardModule.getBoard());
           // renders the board after the turn
           displayEngine.renderBoard();
           // check if the current player won
