@@ -17,7 +17,12 @@ const boardModule = (function boardModel() {
    */
   function playTurn(position, symbol) {
     const { x, y } = position;
-    board[x][y] = symbol;
+    if (board[x][y].length !== 1) {
+      board[x][y] = symbol;
+      return true;
+    }
+
+    return undefined;
   }
   /**
    * Resets the board and sets each cell to be empty strings {''}
@@ -173,10 +178,11 @@ const controllerModule = (function controller() {
       const targetPos = cellNumberToPosition[currentCell];
       if (node.textContent === '') {
         node.addEventListener('click', () => {
-          // sets the class for the corresponding symbol
-          node.setAttribute('class', `board__cell ${playerSymbols[turn % 2]}`);
           // plays a turn to affect the board array
-          boardModule.playTurn(targetPos, playerSymbols[turn % 2]);
+          if (boardModule.playTurn(targetPos, playerSymbols[turn % 2]) !== undefined) {
+            // sets the class for the corresponding symbol
+            node.setAttribute('class', `board__cell ${playerSymbols[turn % 2]}`);
+          }
           // renders the board after the turn
           displayEngine.renderBoard();
           // check if the current player won
@@ -184,7 +190,8 @@ const controllerModule = (function controller() {
           // pass the turn
           turn += 1;
         });
-      } else {
+      }
+      if (node.textContent.length === 1) {
         // reset event listeners for taken cells
         node.parentElement.replaceChild(node.cloneNode(true), node);
       }
