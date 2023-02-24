@@ -13,6 +13,7 @@
     "rules": {
         "no-console": "off",
         "no-unused-vars": "off",
-        "no-param-reassign": "off"
+        "no-param-reassign": "off",
+        "wrap-iife": "off"
     }
 }

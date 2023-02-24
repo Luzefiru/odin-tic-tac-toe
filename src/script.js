@@ -2,7 +2,7 @@ function Position(x, y) {
   return { x, y };
 }
 
-function boardModel() {
+const boardModule = (function boardModel() {
   // board[row][col]
   let board = [
     ['O', 'O', 'X'],
@@ -109,6 +109,6 @@ function boardModel() {
   return {
     playTurn, newGame, isWinner, getBoard,
   };
-}
+})();
 
-boardModel();
+console.log(boardModule.getBoard());
