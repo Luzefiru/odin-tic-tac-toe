@@ -6,8 +6,8 @@ const boardModule = (function boardModel() {
   // board[row][col]
   let board = [
     ['O', 'O', 'X'],
-    ['O', 'X', 'O'],
-    ['X', 'O', 'X'],
+    ['O', '', 'O'],
+    ['', 'O', 'X'],
   ];
 
   /**
@@ -113,20 +113,20 @@ const boardModule = (function boardModel() {
 
 const displayEngine = (function display() {
   const cellNodeList = document.querySelectorAll('.board__cell');
+  const cellNumberToPosition = {
+    0: Position(0, 0),
+    1: Position(0, 1),
+    2: Position(0, 2),
+    3: Position(1, 0),
+    4: Position(1, 1),
+    5: Position(1, 2),
+    6: Position(2, 0),
+    7: Position(2, 1),
+    8: Position(2, 2),
+  };
 
   function renderBoard() {
     const board = boardModule.getBoard();
-    const cellNumberToPosition = {
-      0: Position(0, 0),
-      1: Position(0, 1),
-      2: Position(0, 2),
-      3: Position(1, 0),
-      4: Position(1, 1),
-      5: Position(1, 2),
-      6: Position(2, 0),
-      7: Position(2, 1),
-      8: Position(2, 2),
-    };
 
     // creates a cells array that contains each board value from cells 1 to 9
     const cells = [];
@@ -147,4 +147,45 @@ const displayEngine = (function display() {
   return { renderBoard };
 })();
 
+const controllerModule = (function controller() {
+  const cellNumberToPosition = {
+    0: Position(0, 0),
+    1: Position(0, 1),
+    2: Position(0, 2),
+    3: Position(1, 0),
+    4: Position(1, 1),
+    5: Position(1, 2),
+    6: Position(2, 0),
+    7: Position(2, 1),
+    8: Position(2, 2),
+  };
+  /**
+   * Sets the turn to the player with the {symbol} and disables empty cell.
+   * @param {String} symbol - the symbol of the player to start their turn
+   */
+  function setTurn(symbol) {
+    const cellNodeList = document.querySelectorAll('.board__cell');
+    // makes each empty cell clickable to allow the player to play a turn then render the board
+    let currentCell = 0;
+    cellNodeList.forEach((node) => {
+      if (node.textContent === '') {
+        node.addEventListener('click', () => {
+          console.log('EMPTY CELL');
+          // plays a turn to affect the board array
+          boardModule.playTurn(cellNumberToPosition[currentCell], symbol);
+          // renders the board after the turn
+          displayEngine.renderBoard();
+        });
+      } else {
+        // reset event listeners for taken cells
+        node.parentElement.replaceChild(node.cloneNode(true), node);
+      }
+    });
+    currentCell += 1;
+  }
+
+  return { setTurn };
+})();
+
 displayEngine.renderBoard();
+controllerModule.setTurn('X');
