@@ -14,9 +14,10 @@ html, body {
   --background: #1f2020;
   --surface: #f3f7f1;
   --shadow: #929391;
+  --shadow-box: #5f6363;
   --primary: #5e67de;
   --primary-variant: #3642C8;
-  --secondary: #c05cd5;
+  --secondary: #cc6edf;
   --secondary-variant: #AC38C6;
 }
 
@@ -46,7 +47,7 @@ body {
   width: 1fr;
   height: 1fr;
   border-radius: 12px;
-  box-shadow: inset 2px -3px 2px #5f6363;
+  box-shadow: inset 2px -3px 2px var(--shadow-box);
 
   font-family: 'Fredoka One';
   font-size: 8rem;
@@ -54,14 +55,10 @@ body {
   place-items: center;
 }
 
-.board__cell .cell--row1 {
-  grid-area: row1;
+.board__cell.X {
+  color: var(--primary);
 }
 
-.board__cell .cell--row2 {
-  grid-area: row2;
-}
-
-.board__cell .cell--row3 {
-  grid-area: row3;
+.board__cell.O {
+  color: var(--secondary);
 }
