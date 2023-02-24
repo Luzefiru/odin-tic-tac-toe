@@ -1,7 +1,9 @@
 # odin-tic-tac-toe
 An interactive Tic Tac Toe browser game to practice the JavaScript Module Pattern and Factory Function Closure.
 
-This project served as my gateway towards using the Module Design Pattern with Factory Functions, taking advantage of Function Closure whenever possible to reduce name pollution in the global scope. JavaScript has a very interesting mechanic of allowing inner functions access outer function data (variables, methods, etc.) inside their own local scope. This behavior is made more unique when those inner functions retain the values even when the outer function finishes invoking. In a way, it's similar to the `static` modifier in the C Programming Langauge because even if the outer function returned, the data inside it is retained inside the heap, so that its inner functions can still access references to them.
+JavaScript has a very interesting mechanic of allowing inner functions access outer function data (variables, methods, etc.) inside their own local scope. This behavior is made more unique when those inner functions retain the values even when the outer function finishes invoking.
+
+In a way, it's similar to the `static` modifier in the C Programming Langauge because even if the outer function returned, the data inside it is retained inside the heap, so that its inner functions can still access references to them.
 
 In order to do this, we have to return an object containing the methods & variables you want to share (Public Data), while the others can be Privatized as Private Data (also sometimes called Privileged).
 
