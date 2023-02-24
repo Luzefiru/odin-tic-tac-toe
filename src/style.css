@@ -45,12 +45,12 @@ body {
   border-radius: 24px;
   gap: 0.5rem;
   padding: 0.75rem;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
 }
 
 .board__cell {
   background-color: var(--surface);
-  width: 1fr;
-  height: 1fr;
   border-radius: 12px;
   box-shadow: inset 2px -3px 2px var(--shadow-box);
 
