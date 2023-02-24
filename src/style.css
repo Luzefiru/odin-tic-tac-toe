@@ -7,3 +7,48 @@
 html, body {
   height: 100%;
 }
+
+:root {
+  --background: #1f2020;
+  --surface: #f3f7f1;
+  --shadow: #929391;
+  --primary: #5e67de;
+  --primary-variant: #3642C8;
+  --secondary: #c05cd5;
+  --secondary-variant: #AC38C6;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.board {
+  display: grid;
+  grid-template-areas: 
+    "row1 row1 row1"
+    "row2 row2 row2"
+    "row3 row3 row3";
+  width: 40rem;
+  height: 40rem;
+  background-color: red;
+}
+
+.board__cell {
+  background-color: wheat;
+  height: 5rem;
+  width: 5rem;;
+}
+
+.board__cell .cell--row1 {
+  grid-area: row1;
+}
+
+.board__cell .cell--row2 {
+  grid-area: row2;
+}
+
+.board__cell .cell--row3 {
+  grid-area: row3;
+}
