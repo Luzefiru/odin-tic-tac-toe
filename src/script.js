@@ -189,6 +189,10 @@ const controllerModule = (function controller() {
           checkWinner();
           // pass the turn
           turn += 1;
+
+          if (turn > 8) {
+            displayEngine.displayMessage("It's a tie!");
+          }
         });
       }
       if (node.textContent.length === 1) {
