@@ -168,11 +168,11 @@ const controllerModule = (function controller() {
     // makes each empty cell clickable to allow the player to play a turn then render the board
     let currentCell = 0;
     cellNodeList.forEach((node) => {
+      const targetPos = cellNumberToPosition[currentCell];
       if (node.textContent === '') {
         node.addEventListener('click', () => {
-          console.log('EMPTY CELL');
           // plays a turn to affect the board array
-          boardModule.playTurn(cellNumberToPosition[currentCell], symbol);
+          boardModule.playTurn(targetPos, symbol);
           // renders the board after the turn
           displayEngine.renderBoard();
         });
@@ -180,8 +180,8 @@ const controllerModule = (function controller() {
         // reset event listeners for taken cells
         node.parentElement.replaceChild(node.cloneNode(true), node);
       }
+      currentCell += 1;
     });
-    currentCell += 1;
   }
 
   return { setTurn };
