@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+
 * {
   margin: 0;
   padding: 0;
@@ -45,6 +47,11 @@ body {
   height: 1fr;
   border-radius: 12px;
   box-shadow: inset 2px -3px 2px #5f6363;
+
+  font-family: 'Fredoka One';
+  font-size: 8rem;
+  display: grid;
+  place-items: center;
 }
 
 .board__cell .cell--row1 {
