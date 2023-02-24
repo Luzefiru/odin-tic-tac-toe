@@ -7,7 +7,7 @@ function boardModel() {
   let board = [
     ['X', 'O', 'X'],
     ['O', 'X', 'X'],
-    ['X', 'X', 'O'],
+    ['X', 'X', 'X'],
   ];
 
   /**
@@ -25,4 +25,35 @@ function boardModel() {
   function newGame() {
     board = board.map(() => ['', '', '']);
   }
+  function isWinner(symbol) {
+    let noMatch = true;
+
+    // checks for 3-matching rows
+    for (let row = 0; row < board.length; row += 1) {
+      const matches = [];
+      for (let col = 0; col < board[row].length; col += 1) {
+        if (board[row][col] === symbol) {
+          matches.push(true);
+        } else {
+          matches.push(false);
+        }
+      }
+
+      // if there is a mismatch in the row, then noMatch holds true
+      if (matches.find((bool) => bool === false) !== undefined) {
+        noMatch = true;
+      } else {
+        noMatch = false;
+      }
+    }
+    // checks for 3-matching columns
+
+    // checks for diagonal matches
+
+    return !noMatch;
+  }
+
+  console.log(isWinner('X'));
 }
+
+boardModel();
