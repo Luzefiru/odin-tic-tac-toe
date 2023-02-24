@@ -161,10 +161,15 @@ const controllerModule = (function controller() {
     7: Position(2, 1),
     8: Position(2, 2),
   };
+  function restartPrompt() {
+    alert('The page will now refresh to restart the game.');
+    window.location.reload();
+  }
   function checkWinner() {
     console.log(boardModule.isWinner(playerSymbols[turn % 2]));
     if (boardModule.isWinner(playerSymbols[turn % 2])) {
       displayEngine.displayMessage(`${playerSymbols[turn % 2]} is the winner!`);
+      setTimeout(restartPrompt, 250);
     }
   }
   /**
@@ -192,6 +197,7 @@ const controllerModule = (function controller() {
 
           if (turn > 8) {
             displayEngine.displayMessage("It's a tie!");
+            setTimeout(restartPrompt, 500);
           }
         });
       }
@@ -203,7 +209,7 @@ const controllerModule = (function controller() {
     });
   }
 
-  return { setTurn };
+  return { setTurn, turn };
 })();
 
 boardModule.newGame();
