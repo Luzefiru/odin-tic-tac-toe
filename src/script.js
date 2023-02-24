@@ -5,7 +5,7 @@ function Position(x, y) {
 function boardModel() {
   // board[row][col]
   let board = [
-    ['X', 'O', 'X'],
+    ['O', 'O', 'X'],
     ['O', 'X', 'O'],
     ['X', 'O', 'X'],
   ];
@@ -47,29 +47,54 @@ function boardModel() {
       }
     }
     /* checks for 3-matching columns */
-    for (let col = 0; col < board.length; col += 1) {
-      const matches = [];
-      for (let row = 0; row < board[col].length; row += 1) {
-        if (board[row][col] === symbol) {
-          matches.push(true);
+    if (noMatch) {
+      for (let col = 0; col < board.length; col += 1) {
+        const matches = [];
+        for (let row = 0; row < board[col].length; row += 1) {
+          if (board[row][col] === symbol) {
+            matches.push(true);
+          } else {
+            matches.push(false);
+          }
+        }
+        // if there is a mismatch in the column, then noMatch holds true
+        if (matches.find((bool) => bool === false) !== undefined) {
+          noMatch = true;
         } else {
-          matches.push(false);
+          noMatch = false;
         }
       }
-      // if there is a mismatch in the column, then noMatch holds true
+    }
+    /* checks for top-left to bottom-right diagonal matches */
+    if (noMatch) {
+      const matches = [];
+      for (let colrow = 0; colrow < board.length; colrow += 1) {
+        matches.push(board[colrow][colrow] === symbol);
+      }
       if (matches.find((bool) => bool === false) !== undefined) {
         noMatch = true;
       } else {
         noMatch = false;
       }
     }
-    // checks for diagonal matches
+    /* checks for top-right to bottom-left diagonal matches */
+    if (noMatch) {
+      const matches = [];
+      for (let row = 0, col = 2; row < board.length; row += 1, col -= 1) {
+        matches.push(board[row][col] === symbol);
+      }
+      if (matches.find((bool) => bool === false) !== undefined) {
+        noMatch = true;
+      } else {
+        noMatch = false;
+      }
+    }
 
     // if noMatch is true, then {symbol} did not win, otherwise {symbol} wins
     return !noMatch;
   }
 
-  console.log(isWinner('X'));
+  console.log(isWinner('O'));
 }
 
 boardModel();
