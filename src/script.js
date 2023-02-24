@@ -50,6 +50,7 @@ function boardModel() {
 
     // checks for diagonal matches
 
+    // if noMatch is true, then {symbol} did not win, otherwise {symbol} wins
     return !noMatch;
   }
 
