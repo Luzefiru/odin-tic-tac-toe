@@ -6,8 +6,8 @@ function boardModel() {
   // board[row][col]
   let board = [
     ['X', 'O', 'X'],
-    ['O', 'X', 'X'],
-    ['X', 'X', 'X'],
+    ['O', 'X', 'O'],
+    ['X', 'O', 'X'],
   ];
 
   /**
@@ -28,7 +28,7 @@ function boardModel() {
   function isWinner(symbol) {
     let noMatch = true;
 
-    // checks for 3-matching rows
+    /* checks for 3-matching rows */
     for (let row = 0; row < board.length; row += 1) {
       const matches = [];
       for (let col = 0; col < board[row].length; col += 1) {
@@ -46,8 +46,23 @@ function boardModel() {
         noMatch = false;
       }
     }
-    // checks for 3-matching columns
-
+    /* checks for 3-matching columns */
+    for (let col = 0; col < board.length; col += 1) {
+      const matches = [];
+      for (let row = 0; row < board[col].length; row += 1) {
+        if (board[row][col] === symbol) {
+          matches.push(true);
+        } else {
+          matches.push(false);
+        }
+      }
+      // if there is a mismatch in the column, then noMatch holds true
+      if (matches.find((bool) => bool === false) !== undefined) {
+        noMatch = true;
+      } else {
+        noMatch = false;
+      }
+    }
     // checks for diagonal matches
 
     // if noMatch is true, then {symbol} did not win, otherwise {symbol} wins
