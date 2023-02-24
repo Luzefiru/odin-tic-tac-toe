@@ -111,4 +111,16 @@ const boardModule = (function boardModel() {
   };
 })();
 
-console.log(boardModule.getBoard());
+function display() {
+  const cells = document.querySelectorAll('.board__cell');
+
+  function resetBoard() {
+    cells.forEach((cell) => {
+      cell.textContent = '';
+      cell.setAttribute('class', 'board__cell');
+    });
+  }
+  resetBoard();
+}
+
+display();
