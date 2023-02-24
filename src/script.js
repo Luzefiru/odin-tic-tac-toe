@@ -116,6 +116,17 @@ const displayEngine = (function display() {
 
   function renderBoard() {
     const board = boardModule.getBoard();
+    const cellNumberToPosition = {
+      0: Position(0, 0),
+      1: Position(0, 1),
+      2: Position(0, 2),
+      3: Position(1, 0),
+      4: Position(1, 1),
+      5: Position(1, 2),
+      6: Position(2, 0),
+      7: Position(2, 1),
+      8: Position(2, 2),
+    };
 
     // creates a cells array that contains each board value from cells 1 to 9
     const cells = [];
