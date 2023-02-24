@@ -148,6 +148,8 @@ const displayEngine = (function display() {
 })();
 
 const controllerModule = (function controller() {
+  const playerSymbols = ['X', 'O'];
+  let turn = 0;
   const cellNumberToPosition = {
     0: Position(0, 0),
     1: Position(0, 1),
@@ -160,10 +162,10 @@ const controllerModule = (function controller() {
     8: Position(2, 2),
   };
   /**
-   * Sets the turn to the player with the {symbol} and disables empty cell.
-   * @param {String} symbol - the symbol of the player to start their turn
+   * Sets the turn to the player and disables empty cells.
    */
-  function setTurn(symbol) {
+  function setTurn() {
+    console.log(turn);
     const cellNodeList = document.querySelectorAll('.board__cell');
     // makes each empty cell clickable to allow the player to play a turn then render the board
     let currentCell = 0;
@@ -172,9 +174,10 @@ const controllerModule = (function controller() {
       if (node.textContent === '') {
         node.addEventListener('click', () => {
           // plays a turn to affect the board array
-          boardModule.playTurn(targetPos, symbol);
+          boardModule.playTurn(targetPos, playerSymbols[turn % 2]);
           // renders the board after the turn
           displayEngine.renderBoard();
+          turn += 1;
         });
       } else {
         // reset event listeners for taken cells
@@ -187,5 +190,5 @@ const controllerModule = (function controller() {
   return { setTurn };
 })();
 
-displayEngine.renderBoard();
-controllerModule.setTurn('X');
+boardModule.newGame();
+controllerModule.setTurn();
