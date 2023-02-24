@@ -5,9 +5,9 @@ function Position(x, y) {
 const boardModule = (function boardModel() {
   // board[row][col]
   let board = [
-    ['O', 'O', 'X'],
-    ['O', '', 'O'],
-    ['', 'O', 'X'],
+    ['', '', ''],
+    ['', '', ''],
+    ['', '', ''],
   ];
 
   /**
