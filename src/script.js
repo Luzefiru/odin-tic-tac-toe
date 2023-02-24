@@ -49,6 +49,7 @@ const boardModule = (function boardModel() {
         noMatch = true;
       } else {
         noMatch = false;
+        break;
       }
     }
     /* checks for 3-matching columns */
@@ -67,6 +68,7 @@ const boardModule = (function boardModel() {
           noMatch = true;
         } else {
           noMatch = false;
+          break;
         }
       }
     }
@@ -143,8 +145,12 @@ const displayEngine = (function display() {
       currentCell += 1;
     });
   }
+  function displayMessage(message) {
+    const announcement = document.querySelector('.header__message');
+    announcement.textContent = message;
+  }
 
-  return { renderBoard };
+  return { renderBoard, displayMessage };
 })();
 
 const controllerModule = (function controller() {
@@ -161,11 +167,16 @@ const controllerModule = (function controller() {
     7: Position(2, 1),
     8: Position(2, 2),
   };
+  function checkWinner() {
+    console.log(boardModule.isWinner(playerSymbols[turn % 2]));
+    if (boardModule.isWinner(playerSymbols[turn % 2])) {
+      displayEngine.displayMessage(`${playerSymbols[turn % 2]} is the winner!`);
+    }
+  }
   /**
    * Sets the turn to the player and disables empty cells.
    */
   function setTurn() {
-    console.log(turn);
     const cellNodeList = document.querySelectorAll('.board__cell');
     // makes each empty cell clickable to allow the player to play a turn then render the board
     let currentCell = 0;
@@ -175,8 +186,12 @@ const controllerModule = (function controller() {
         node.addEventListener('click', () => {
           // plays a turn to affect the board array
           boardModule.playTurn(targetPos, playerSymbols[turn % 2]);
+          console.log(boardModule.getBoard());
           // renders the board after the turn
           displayEngine.renderBoard();
+          // check if the current player won
+          checkWinner();
+          // pass the turn
           turn += 1;
         });
       } else {
