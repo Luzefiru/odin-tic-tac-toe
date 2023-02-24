@@ -22,20 +22,24 @@ html, body {
 }
 
 body {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: grid;
+  grid-template-areas:
+    "header"
+    "board"
+    "footer";
+  place-items: center;
   background-color: var(--background);
 }
 
 .board {
+  grid-area: board;
   display: grid;
   grid-template-areas: 
     "row1 row1 row1"
     "row2 row2 row2"
     "row3 row3 row3";
-  width: 40rem;
-  height: 40rem;
+  width: 35rem;
+  height: 35rem;
   background-color: var(--shadow);
   border-radius: 24px;
   gap: 0.5rem;
@@ -50,9 +54,11 @@ body {
   box-shadow: inset 2px -3px 2px var(--shadow-box);
 
   font-family: 'Fredoka One';
-  font-size: 8rem;
+  font-size: 7rem;
   display: grid;
   place-items: center;
+
+  transition: ease 0.2s;
 }
 
 .board__cell.X {
